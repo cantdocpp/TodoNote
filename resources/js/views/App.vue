@@ -11,13 +11,14 @@
                 <div class="sidenav">
                     <aside class="menu">
                         <ul class="menu-list">
-                            <li><router-link :to="{ name: 'home' }">Today</router-link></li>
-                            <li><router-link :to="{ name: 'home' }">Next 7 Days</router-link></li>
+                            <li><router-link :to="{ name: 'home' }">home</router-link></li>
+                            <li><router-link :to="{ name: 'theTask' }">Today</router-link></li>
                         </ul>
                     </aside>
                 </div>
                 <div class="content">
                     <router-view></router-view>
+
                 </div>
             </div>
         </div>  
@@ -26,7 +27,19 @@
 
 </template>
 <script>
-    export default {}
+    import TodoList from '../component/TodoList';
+
+    export default {
+        data() {
+            return {
+
+            }
+        },
+
+        components: {
+            TodoList
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
