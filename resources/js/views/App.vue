@@ -8,17 +8,15 @@
 
         <div class="container">
             <div class="main__content">
-                <div class="sidenav">
+                <div class="sidenav" v-if="$route.name != 'login' && $route.name != 'register'">
                     <aside class="menu">
                         <ul class="menu-list">
-                            <li><router-link :to="{ name: 'home' }">home</router-link></li>
-                            <li><router-link :to="{ name: 'theTask' }">Today</router-link></li>
+                            <li><router-link :to="{ name: 'theTask', params: {section: 'Today'} }">Today</router-link></li>
                         </ul>
                     </aside>
                 </div>
                 <div class="content">
                     <router-view></router-view>
-
                 </div>
             </div>
         </div>  
@@ -32,7 +30,7 @@
     export default {
         data() {
             return {
-
+                
             }
         },
 
@@ -43,6 +41,12 @@
 </script>
 
 <style lang="scss" scoped>
+    .content {
+        font-family: 'Roboto', sans-serif;
+        margin-left: 50px;
+        width: 70%;
+    }
+
     a {
         color: black;
     }
@@ -62,7 +66,6 @@
 
     .container {
         position: relative;
-        padding: 10px;
     }
 
     .sidenav {
@@ -75,9 +78,8 @@
 
     .main__content {
         display: flex;
-        padding-top: 20px;
+        padding-top: 40px;
     }
-
 
     @media only screen and (max-width: 768px) {
         .navbar-brand {

@@ -12,3 +12,12 @@
 */
 
 Route::get('/{any}', 'MainController@index')->where('any', '.*');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['prefix' => 'api'], function() {
+    Route::post('/users', 'UserController@store');
+});
+
