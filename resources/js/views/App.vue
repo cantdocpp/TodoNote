@@ -2,7 +2,12 @@
     <div class="main">
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <router-link :to="{ name: 'home' }" class="brand">TodoNote</router-link>
+                <router-link 
+                :to="{ name: 'home' }" 
+                class="brand" 
+                v-if="$route.name != 'login' && $route.name != 'register'">
+                TodoNote
+                </router-link>
             </div>
         </nav>
 

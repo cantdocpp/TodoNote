@@ -7,7 +7,8 @@ Vue.use(VueRouter)
 import App from './views/App'
 import Home from './views/Home'
 import TodoList from './component/TodoList'
-import Login from './views/Login.vue';
+import Login from './views/Login.vue'
+import Register from './views/Register.vue'
 
 const router = new VueRouter({
     mode: 'history',
@@ -21,6 +22,11 @@ const router = new VueRouter({
             path: '/login',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: Register
         },
         {
             path: '/:section',

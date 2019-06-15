@@ -2,20 +2,21 @@
     <div class="input__form">
         <div class="input__form-content">
             <div class="form__header">
-                <span>Login</span>
+                <span>Welcome To TodoNote</span>
             </div>
             
-            <div class="register__link">
-                <span>Don't have an account ?  <router-link :to="{ name: 'register' }">Register</router-link></span>
+            <div class="login__link">
+                <span>Already have an account ?  <router-link :to="{ name: 'login' }">Log in</router-link></span>
             </div>
 
             <div class="form__content">
+                <input type="text" class="input__form" placeholder="Your Name">
                 <input type="text" class="input__form" placeholder="Email">
                 <input type="password" class="input__form" placeholder="Password">
             </div>
 
             <div class="form__footer">
-                <button>Login</button>
+                <button>Register</button>
             </div>
         </div>
     </div>
@@ -44,7 +45,7 @@
         border-radius: 5px;
     }
 
-    .register__link {
+    .login__link {
         width: 80%;
         display: block;
         margin: auto;
@@ -105,4 +106,5 @@
             background: #c53727;
         }
     }
+    
 </style>

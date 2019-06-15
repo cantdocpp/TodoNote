@@ -15,8 +15,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        
         return response()->json([
-            'message' => 'received'
+            'message' => 'received',
+            'request' => $request->name
         ], 200);
     }
 
