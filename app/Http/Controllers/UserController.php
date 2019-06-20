@@ -31,7 +31,7 @@ class UserController extends Controller
             return response()->json([
                 'success' => false,
                 'errors'  => $validator->errors()->all(),
-            ], 400);
+            ]);
         } else {
             DB::table('users')->insert($request->all());
 
