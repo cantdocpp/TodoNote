@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -15,11 +17,33 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'name.required' => 'The name field is required.'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users|max:30',
+            'email' => 'required',
+            'password' => 'required|min:6'
+        ], $messages); 
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors'  => $validator->errors()->all(),
+            ], 400);
+        } else {
+            DB::table('users')->insert($request->all());
+
+            return response()->json([
+                'success' => true,
+                'request_name' => $request->name
+            ], 200);
+        }
+
+        // DB::table('users')->insert($validateData);
         
-        return response()->json([
-            'message' => 'received',
-            'request' => $request->name
-        ], 200);
+        
     }
 
     /**

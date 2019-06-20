@@ -10,23 +10,46 @@
             </div>
 
             <div class="form__content">
-                <input type="text" class="input__form" placeholder="Your Name">
-                <input type="text" class="input__form" placeholder="Email">
-                <input type="password" class="input__form" placeholder="Password">
+                <input type="text" class="input__form" placeholder="Your Name" v-model="name">
+                <input type="text" class="input__form" placeholder="Email" v-model="email">
+                <input type="password" class="input__form" placeholder="Password" v-model="password">
             </div>
 
             <div class="form__footer">
-                <button>Register</button>
+                <button @click="submit">Register</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         data() {
             return {
+                name : '',
+                password: '',
+                email: ''
+            }
+        },
 
+        methods: {
+            submit() {
+                const sendData = {
+                    name: this.name,
+                    password: this.password,
+                    email: this.email
+                }
+
+                axios.post('http://localhost:8000/api/users', sendData)
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(function(error) {
+                    console.log(error)
+                    console.log('asd')
+                })
             }
         }
     }
