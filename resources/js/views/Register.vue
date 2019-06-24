@@ -10,9 +10,13 @@
             </div>
 
             <div class="form__content">
-                <input type="text" class="input__form" placeholder="Your Name" v-model="name">
-                <input type="text" class="input__form" placeholder="Email" v-model="email">
-                <input type="password" class="input__form" placeholder="Password" v-model="password">
+                <input type="text" class="input__form" :class="nameError ? 'is-error' : ''" placeholder="Your Name" v-model="name">
+                <p class="help is-danger" v-if="nameError">Username required</p>
+                <input type="text" class="input__form" placeholder="Email" :class="emailError ? 'is-error' : ''" v-model="email">
+                <p class="help is-danger" v-if="emailError">email required</p>
+                <p class="help is-danger" v-if="!isEmail">Valid email required</p>
+                <input type="password" class="input__form" :class="passwordError ? 'is-error' : ''" placeholder="Password" v-model="password">
+                <p class="help is-danger" v-if="passwordError">password required</p>
             </div>
 
             <div class="form__footer">
@@ -30,26 +34,94 @@
             return {
                 name : '',
                 password: '',
-                email: ''
+                email: '',
+                errors: [],
+                nameError: false,
+                emailError: false,
+                passwordError: false,
+                isEmail: true
             }
         },
 
         methods: {
             submit() {
+                this.checkForm();
+                if(this.frontendValidation() === false) {
+                    return ;
+                }
+
                 const sendData = {
                     name: this.name,
                     password: this.password,
                     email: this.email
                 }
 
+                let self = this;
+
                 axios.post('http://localhost:8000/api/users', sendData)
                 .then(response => {
                     console.log(response);
+                    self.clearingForm();
                 })
                 .catch(function(error) {
+                    self.errors = error.response.data.errors;
+                    console.error(error.response.data.errors);
                     console.log(error)
-                    console.log('asd')
                 })
+            },
+
+            checkForm: function () {
+                this.errors = [];
+
+                this.nameError = false;
+                this.emailError = false;
+                this.passwordError = false;
+                this.isEmail = true
+
+                if (!this.name) {
+                    this.nameError = true;
+                    this.errors.push("Name required.");
+                }
+                if (!this.password) {
+                    this.passwordError = true;
+                    this.errors.push("Password required.");
+                }
+                if (!this.email) {
+                    this.emailError = true;
+                    this.errors.push('Email required.');
+                } else if (!this.validEmail(this.email)) {
+                    // console.log(this.validEmail(this.email), '<<<<<<<<valid email')
+                    this.isEmail = false;
+                    this.errors.push('Valid email required.');
+                }
+
+                if (!this.errors.length) {
+                    return true;
+                }
+            },
+
+            validEmail: function (email) {
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            },
+
+            clearingForm: function() {
+                this.name = '';
+                this.email = '';
+                this.password = '';
+                this.errors = [];
+                this.nameError = false;
+                this.emailError = false;
+                this.passwordError = false;
+                this.isEmail = true;
+            },
+
+            frontendValidation: function() {
+                if (!this.nameError && !this.passwordError && !this.emailError && this.isEmail) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
     }
@@ -88,11 +160,19 @@
             border: 1px solid #ddd;
         }
 
+        .help {
+            margin-left: 40px;
+        }
+
          input[type=password], input[type=text] {
             margin-top: 15px;
             padding: 10px 10px;
             border-radius: 3px;
             box-shadow: none;
+        }
+
+        .is-error {
+            border: 1px solid red;
         }
 
     }

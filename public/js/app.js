@@ -1868,28 +1868,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       name: '',
       password: '',
-      email: ''
+      email: '',
+      errors: [],
+      nameError: false,
+      emailError: false,
+      passwordError: false,
+      isEmail: true
     };
   },
   methods: {
     submit: function submit() {
+      this.checkForm();
+
+      if (this.frontendValidation() === false) {
+        return;
+      }
+
       var sendData = {
         name: this.name,
         password: this.password,
         email: this.email
       };
+      var self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:8000/api/users', sendData).then(function (response) {
         console.log(response);
+        self.clearingForm();
       })["catch"](function (error) {
+        self.errors = error.response.data.errors;
+        console.error(error.response.data.errors);
         console.log(error);
-        console.log('asd');
       });
+    },
+    checkForm: function checkForm() {
+      this.errors = [];
+      this.nameError = false;
+      this.emailError = false;
+      this.passwordError = false;
+      this.isEmail = true;
+
+      if (!this.name) {
+        this.nameError = true;
+        this.errors.push("Name required.");
+      }
+
+      if (!this.password) {
+        this.passwordError = true;
+        this.errors.push("Password required.");
+      }
+
+      if (!this.email) {
+        this.emailError = true;
+        this.errors.push('Email required.');
+      } else if (!this.validEmail(this.email)) {
+        // console.log(this.validEmail(this.email), '<<<<<<<<valid email')
+        this.isEmail = false;
+        this.errors.push('Valid email required.');
+      }
+
+      if (!this.errors.length) {
+        return true;
+      }
+    },
+    validEmail: function validEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
+    clearingForm: function clearingForm() {
+      this.name = '';
+      this.email = '';
+      this.password = '';
+      this.errors = [];
+      this.nameError = false;
+      this.emailError = false;
+      this.passwordError = false;
+      this.isEmail = true;
+    },
+    frontendValidation: function frontendValidation() {
+      if (!this.nameError && !this.passwordError && !this.emailError && this.isEmail) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 });
@@ -1965,7 +2034,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".content {\n  width: 100% !important;\n}\n.input__form {\n  width: 400px;\n  margin: 0px auto;\n  border: 1px solid #ddd;\n  position: relative;\n  border-radius: 5px;\n}\n.login__link {\n  width: 80%;\n  display: block;\n  margin: auto;\n  font-size: 15px;\n  color: #aaa;\n  margin-top: 20px;\n}\n.form__content {\n  margin: 20px 0;\n  display: block;\n}\n.form__content .input__form {\n  width: 80%;\n  display: block;\n  margin: auto;\n  border: 1px solid #ddd;\n}\n.form__content input[type=password], .form__content input[type=text] {\n  margin-top: 15px;\n  padding: 10px 10px;\n  border-radius: 3px;\n  box-shadow: none;\n}\n.form__header {\n  padding-top: 30px;\n}\n.form__header span {\n  font-size: 1.5em;\n  margin: 0 auto;\n  text-align: center;\n  display: block;\n  font-weight: 500;\n}\n.form__footer {\n  padding-bottom: 20px;\n}\n.form__footer button {\n  margin: 0 auto;\n  display: block;\n  width: 80%;\n  padding: 8px 0;\n  background: #db4c3f;\n  border: none;\n  border-radius: 3px;\n  color: white;\n  font-size: 15px;\n  margin-top: 30px !important;\n}\n.form__footer button:hover {\n  background: #c53727;\n}", ""]);
+exports.push([module.i, ".content {\n  width: 100% !important;\n}\n.input__form {\n  width: 400px;\n  margin: 0px auto;\n  border: 1px solid #ddd;\n  position: relative;\n  border-radius: 5px;\n}\n.login__link {\n  width: 80%;\n  display: block;\n  margin: auto;\n  font-size: 15px;\n  color: #aaa;\n  margin-top: 20px;\n}\n.form__content {\n  margin: 20px 0;\n  display: block;\n}\n.form__content .input__form {\n  width: 80%;\n  display: block;\n  margin: auto;\n  border: 1px solid #ddd;\n}\n.form__content .help {\n  margin-left: 40px;\n}\n.form__content input[type=password], .form__content input[type=text] {\n  margin-top: 15px;\n  padding: 10px 10px;\n  border-radius: 3px;\n  box-shadow: none;\n}\n.form__content .is-error {\n  border: 1px solid red;\n}\n.form__header {\n  padding-top: 30px;\n}\n.form__header span {\n  font-size: 1.5em;\n  margin: 0 auto;\n  text-align: center;\n  display: block;\n  font-weight: 500;\n}\n.form__footer {\n  padding-bottom: 20px;\n}\n.form__footer button {\n  margin: 0 auto;\n  display: block;\n  width: 80%;\n  padding: 8px 0;\n  background: #db4c3f;\n  border: none;\n  border-radius: 3px;\n  color: white;\n  font-size: 15px;\n  margin-top: 30px !important;\n}\n.form__footer button:hover {\n  background: #c53727;\n}", ""]);
 
 // exports
 
@@ -3453,6 +3522,7 @@ var render = function() {
             }
           ],
           staticClass: "input__form",
+          class: _vm.nameError ? "is-error" : "",
           attrs: { type: "text", placeholder: "Your Name" },
           domProps: { value: _vm.name },
           on: {
@@ -3465,6 +3535,12 @@ var render = function() {
           }
         }),
         _vm._v(" "),
+        _vm.nameError
+          ? _c("p", { staticClass: "help is-danger" }, [
+              _vm._v("Username required")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("input", {
           directives: [
             {
@@ -3475,6 +3551,7 @@ var render = function() {
             }
           ],
           staticClass: "input__form",
+          class: _vm.emailError ? "is-error" : "",
           attrs: { type: "text", placeholder: "Email" },
           domProps: { value: _vm.email },
           on: {
@@ -3487,6 +3564,18 @@ var render = function() {
           }
         }),
         _vm._v(" "),
+        _vm.emailError
+          ? _c("p", { staticClass: "help is-danger" }, [
+              _vm._v("email required")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.isEmail
+          ? _c("p", { staticClass: "help is-danger" }, [
+              _vm._v("Valid email required")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("input", {
           directives: [
             {
@@ -3497,6 +3586,7 @@ var render = function() {
             }
           ],
           staticClass: "input__form",
+          class: _vm.passwordError ? "is-error" : "",
           attrs: { type: "password", placeholder: "Password" },
           domProps: { value: _vm.password },
           on: {
@@ -3507,7 +3597,13 @@ var render = function() {
               _vm.password = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.passwordError
+          ? _c("p", { staticClass: "help is-danger" }, [
+              _vm._v("password required")
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form__footer" }, [
@@ -18801,8 +18897,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\patrick\Documents\TodoNote\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\patrick\Documents\TodoNote\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\phili\Documents\TodoNote\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\phili\Documents\TodoNote\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
