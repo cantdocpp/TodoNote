@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -23,7 +25,7 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:users|max:30',
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required|min:6'
         ], $messages); 
 
@@ -33,17 +35,19 @@ class UserController extends Controller
                 'errors'  => $validator->errors()->all(),
             ], 400);
         } else {
-            DB::table('users')->insert($request->all());
+            $data = [
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'name' => $request->name
+            ];
+
+            DB::table('users')->insert($data);
 
             return response()->json([
                 'success' => true,
                 'request_name' => $request->name
             ], 200);
         }
-
-        // DB::table('users')->insert($validateData);
-        
-        
     }
 
     /**
