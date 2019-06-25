@@ -10,22 +10,46 @@
             </div>
 
             <div class="form__content">
-                <input type="text" class="input__form" placeholder="Email">
-                <input type="password" class="input__form" placeholder="Password">
+                <input type="text" class="input__form" placeholder="Email" v-model="email">
+                <input type="password" class="input__form" placeholder="Password" v-model="password">
             </div>
 
             <div class="form__footer">
-                <button>Login</button>
+                <button @click="login">Login</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import axios from 'axios';
+    import store from '../store';
+
     export default {
         data() {
             return {
+                email: '',
+                password: ''
+            }
+        },
 
+        methods: {
+            login() {
+                let data = {
+                    email: this.email,
+                    password: data
+                }
+
+                store.dispatch("doLogin", data)
+
+                // axios.post('http://localhost:8000/api/login', data)
+                // .then(function(response) {
+                //     console.log(response)
+                // })
+                // .catch(function(error) {
+                //     console.log('error')
+                //     console.log(error.response)
+                // })
             }
         }
     }

@@ -18,6 +18,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(['prefix' => 'api'], function() {
-    Route::post('/users', 'UserController@store');
+    Route::post('/register', 'UserController@register');
+    Route::post('/login', 'UserController@login');
 });
 

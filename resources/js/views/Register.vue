@@ -58,7 +58,7 @@
 
                 let self = this;
 
-                axios.post('http://localhost:8000/api/users', sendData)
+                axios.post('http://localhost:8000/api/register', sendData)
                 .then(response => {
                     console.log(response);
                     self.clearingForm();

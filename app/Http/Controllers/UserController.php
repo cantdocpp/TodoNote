@@ -11,13 +11,15 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function login(Request $request) {
+        
+        return response()->json([
+            'success' => true,
+            'user' => $request->email
+        ], 200);
+    }
+
+    public function register(Request $request)
     {
         $messages = [
             'name.required' => 'The name field is required.'
