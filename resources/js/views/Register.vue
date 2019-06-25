@@ -64,9 +64,9 @@
                     self.clearingForm();
                 })
                 .catch(function(error) {
-                    self.errors = error.response.data.errors;
-                    console.error(error.response.data.errors);
-                    console.log(error)
+                    // self.errors = error.response.data.errors;
+                    console.error(error.response);
+                    console.log(error.response)
                 })
             },
 

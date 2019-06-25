@@ -17,7 +17,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::group(['prefix' => 'api'], function() {
+Route::group(['prefix' => 'api', 'middleware' => 'api'], function() {
     Route::post('/register', 'UserController@register');
     Route::post('/login', 'UserController@login');
 });

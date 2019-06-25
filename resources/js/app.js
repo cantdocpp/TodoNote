@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from './store'
 
 //Import and install the VueRouter plugin with Vue.use()
 Vue.use(VueRouter)

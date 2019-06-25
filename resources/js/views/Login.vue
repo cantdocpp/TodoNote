@@ -37,19 +37,10 @@
             login() {
                 let data = {
                     email: this.email,
-                    password: data
+                    password: this.password
                 }
 
-                store.dispatch("doLogin", data)
-
-                // axios.post('http://localhost:8000/api/login', data)
-                // .then(function(response) {
-                //     console.log(response)
-                // })
-                // .catch(function(error) {
-                //     console.log('error')
-                //     console.log(error.response)
-                // })
+                store.dispatch("doLogin", data);
             }
         }
     }

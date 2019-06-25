@@ -1841,16 +1841,9 @@ __webpack_require__.r(__webpack_exports__);
     login: function login() {
       var data = {
         email: this.email,
-        password: data
+        password: this.password
       };
-      _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch("doLogin", data); // axios.post('http://localhost:8000/api/login', data)
-      // .then(function(response) {
-      //     console.log(response)
-      // })
-      // .catch(function(error) {
-      //     console.log('error')
-      //     console.log(error.response)
-      // })
+      _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch("doLogin", data);
     }
   }
 });
@@ -1928,9 +1921,9 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         self.clearingForm();
       })["catch"](function (error) {
-        self.errors = error.response.data.errors;
-        console.error(error.response.data.errors);
-        console.log(error);
+        // self.errors = error.response.data.errors;
+        console.error(error.response);
+        console.log(error.response);
       });
     },
     checkForm: function checkForm() {
@@ -19504,11 +19497,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _views_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/App */ "./resources/js/views/App.vue");
-/* harmony import */ var _views_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/Home */ "./resources/js/views/Home.vue");
-/* harmony import */ var _component_TodoList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./component/TodoList */ "./resources/js/component/TodoList.vue");
-/* harmony import */ var _views_Login_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/Login.vue */ "./resources/js/views/Login.vue");
-/* harmony import */ var _views_Register_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/Register.vue */ "./resources/js/views/Register.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
+/* harmony import */ var _views_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/App */ "./resources/js/views/App.vue");
+/* harmony import */ var _views_Home__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/Home */ "./resources/js/views/Home.vue");
+/* harmony import */ var _component_TodoList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./component/TodoList */ "./resources/js/component/TodoList.vue");
+/* harmony import */ var _views_Login_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/Login.vue */ "./resources/js/views/Login.vue");
+/* harmony import */ var _views_Register_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./views/Register.vue */ "./resources/js/views/Register.vue");
+
 
  //Import and install the VueRouter plugin with Vue.use()
 
@@ -19523,22 +19518,22 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
     path: '/',
     name: 'home',
-    component: _views_Home__WEBPACK_IMPORTED_MODULE_3__["default"],
+    component: _views_Home__WEBPACK_IMPORTED_MODULE_4__["default"],
     meta: {
       requiresAuth: true
     }
   }, {
     path: '/login',
     name: 'login',
-    component: _views_Login_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _views_Login_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   }, {
     path: '/register',
     name: 'register',
-    component: _views_Register_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _views_Register_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   }, {
     path: '/:section',
     name: 'theTask',
-    component: _component_TodoList__WEBPACK_IMPORTED_MODULE_4__["default"],
+    component: _component_TodoList__WEBPACK_IMPORTED_MODULE_5__["default"],
     props: true,
     meta: {
       requiresAuth: true
@@ -19548,7 +19543,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   components: {
-    App: _views_App__WEBPACK_IMPORTED_MODULE_2__["default"]
+    App: _views_App__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   router: router
 });
@@ -19689,24 +19684,29 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
       commit('loginStart');
       console.log(loginData);
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('http://localhost:8000/api/login', loginData).then(function (response) {
-        //   localStorage.setItem('accessToken', response.data.token);
-        //   commit('loginStop', null);
-        //   commit('updateAccessToken', response.data.token);
-        //   router.push('/users');
-        console.log(response);
+        console.log(response); // let accessToken = response.data.jwt;
+        // document.cookie = 'jwt_access_token=' + accessToken;
+        // commit('loginStop', null);
+        // commit('updateAccessToken', accessToken);
+        // router.push('/');
       })["catch"](function (error) {
-        //   commit('loginStop', error.response.data.error);
-        //   commit('updateAccessToken', null);
-        console.log(error);
+        commit('loginStop', error.response.data.error);
+        commit('updateAccessToken', null);
+        console.log(error.response);
       });
     },
     fetchAccessToken: function fetchAccessToken(_ref2) {
       var commit = _ref2.commit;
-      commit('updateAccessToken', localStorage.getItem('accessToken'));
+      var arrayCookie = document.cookie.split(';');
+      var jwtCookieProperties = b.find(function (element) {
+        return element = 'jwt_access_token';
+      });
+      var accessToken = jwtCookieProperties.split('=')[1];
+      commit('updateAccessToken', accessToken);
     },
     logout: function logout(_ref3) {
       var commit = _ref3.commit;
-      localStorage.removeItem('accessToken');
+      document.cookie = 'jwt_access_token=;';
       commit('logout');
       vue_router__WEBPACK_IMPORTED_MODULE_0__["default"].push('/login');
     }
@@ -20047,8 +20047,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\patrick\Documents\TodoNote\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\patrick\Documents\TodoNote\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\phili\Documents\TodoNote\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\phili\Documents\TodoNote\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

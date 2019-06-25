@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -12,11 +13,33 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function login(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:6|max:255',
+        ]);
+    
+        if($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'messages' => $validator->messages()
+            ], 200);
+        }
+
+        $credentials = request(['email', 'password']);
+    
+        if (! $token = auth('api')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
         
+        return $this->respondWithToken($token);
+    }
+
+    protected function respondWithToken($token) {
         return response()->json([
-            'success' => true,
-            'user' => $request->email
-        ], 200);
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'user' => auth()->user()
+        ]);
     }
 
     public function register(Request $request)
@@ -51,6 +74,12 @@ class UserController extends Controller
             ], 200);
         }
     }
+
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\Guard
+     */
 
     /**
      * Display the specified resource.
