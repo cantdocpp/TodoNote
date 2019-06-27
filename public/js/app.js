@@ -1781,6 +1781,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2056,7 +2066,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".content[data-v-91ac6b5c] {\n  font-family: \"Roboto\", sans-serif;\n  margin-left: 50px;\n  width: 70%;\n}\na[data-v-91ac6b5c] {\n  color: black;\n}\n.icon[data-v-91ac6b5c] {\n  font-size: 20px;\n  vertical-align: middle;\n}\n.brand[data-v-91ac6b5c] {\n  position: absolute;\n  margin-top: 8px;\n  display: inline-block;\n  font-size: 20px;\n}\nnav[data-v-91ac6b5c] {\n  padding: 0 10px;\n  height: 50px !important;\n  position: relative;\n}\n.container[data-v-91ac6b5c] {\n  position: relative;\n}\n.sidenav[data-v-91ac6b5c] {\n  width: 25%;\n}\naside[data-v-91ac6b5c] {\n  overflow-y: auto;\n}\n.main__content[data-v-91ac6b5c] {\n  display: flex;\n  padding-top: 40px;\n}\n@media only screen and (max-width: 768px) {\n.navbar-brand[data-v-91ac6b5c] {\n    display: none;\n}\naside[data-v-91ac6b5c] {\n    display: none;\n}\n}", ""]);
+exports.push([module.i, ".content[data-v-91ac6b5c] {\n  font-family: \"Roboto\", sans-serif;\n  margin-left: 50px;\n  width: 70%;\n}\na[data-v-91ac6b5c] {\n  color: black;\n}\n.topnav[data-v-91ac6b5c] {\n  height: 50px;\n  width: 100%;\n  position: fixed;\n  display: flex;\n  position: relative;\n  z-index: 400;\n}\n.topnav .navbar__brand[data-v-91ac6b5c] {\n  display: inline;\n  margin-left: 10px;\n}\n.topnav .navbar__brand .navbar__brand-title[data-v-91ac6b5c] {\n  display: inline-block;\n  font-size: 22px;\n  align-items: center;\n  height: 100%;\n  display: flex;\n}\n.topnav .navbar__item__end[data-v-91ac6b5c] {\n  display: inline-block;\n  font-size: 18px;\n  right: 10px;\n  position: absolute;\n  align-items: center;\n  height: 100%;\n  display: flex;\n  cursor: pointer;\n}\n.icons[data-v-91ac6b5c] {\n  cursor: pointer;\n  vertical-align: middle;\n}\n.icon[data-v-91ac6b5c] {\n  font-size: 20px;\n  vertical-align: middle;\n}\n.container[data-v-91ac6b5c] {\n  position: relative;\n}\n.sidenav[data-v-91ac6b5c] {\n  width: 25%;\n}\naside[data-v-91ac6b5c] {\n  overflow-y: auto;\n}\n.main__content[data-v-91ac6b5c] {\n  display: flex;\n  padding-top: 40px;\n}\n@media only screen and (max-width: 768px) {\n.navbar__brand[data-v-91ac6b5c] {\n    display: none !important;\n}\naside[data-v-91ac6b5c] {\n    display: none;\n}\n}", ""]);
 
 // exports
 
@@ -3372,29 +3382,26 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "main" }, [
-    _c(
-      "nav",
-      {
-        staticClass: "navbar",
-        attrs: { role: "navigation", "aria-label": "main navigation" }
-      },
-      [
+    _c("nav", { staticClass: "topnav" }, [
+      _c("div", { staticClass: "navbar__brand" }, [
         _c(
           "div",
-          { staticClass: "navbar-brand" },
+          { staticClass: "navbar__brand-title" },
           [
             _vm.$route.name != "login" && _vm.$route.name != "register"
-              ? _c(
-                  "router-link",
-                  { staticClass: "brand", attrs: { to: { name: "home" } } },
-                  [_vm._v("\n            TodoNote\n            ")]
-                )
+              ? _c("router-link", { attrs: { to: { name: "home" } } }, [
+                  _vm._v("\n                TodoNote\n                ")
+                ])
               : _vm._e()
           ],
           1
         )
-      ]
-    ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "navbar__hamburger" }),
+      _vm._v(" "),
+      _vm._m(0)
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "main__content" }, [
@@ -3435,7 +3442,16 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "navbar__item__end" }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("settings")])
+    ])
+  }
+]
 render._withStripped = true
 
 

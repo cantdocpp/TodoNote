@@ -1,13 +1,23 @@
 <template>
     <div class="main">
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <router-link 
-                :to="{ name: 'home' }" 
-                class="brand" 
-                v-if="$route.name != 'login' && $route.name != 'register'">
-                TodoNote
-                </router-link>
+        <nav class="topnav">
+            <div class="navbar__brand">
+                <div class="navbar__brand-title">
+                    <router-link 
+                    :to="{ name: 'home' }" 
+                    class="" 
+                    v-if="$route.name != 'login' && $route.name != 'register'">
+                    TodoNote
+                    </router-link>
+                </div>
+            </div>
+
+            <div class="navbar__hamburger">
+                
+            </div>
+
+            <div class="navbar__item__end">
+                <i class="material-icons">settings</i>
             </div>
         </nav>
 
@@ -56,22 +66,47 @@
         color: black;
     }
 
+    .topnav {
+        height: 50px;
+        width: 100%;
+        position: fixed;
+        display: flex;
+        position: relative;
+        z-index: 400;
+
+        .navbar__brand {
+            display: inline;
+            margin-left: 10px;
+
+            .navbar__brand-title {
+                display: inline-block;
+                font-size: 22px;
+                align-items: center;
+                height: 100%;
+                display: flex;
+            }
+        }
+
+        .navbar__item__end {
+            display: inline-block;
+            font-size: 18px;
+            right: 10px;
+            position: absolute;
+            align-items: center;
+            height: 100%;
+            display: flex;
+            cursor: pointer;
+        }
+    }
+
+    .icons {
+        cursor: pointer;
+        vertical-align: middle
+    }
+
     .icon {
         font-size: 20px;
         vertical-align: middle;
-    }
-
-    .brand {
-        position: absolute;
-        margin-top: 8px;
-        display: inline-block;
-        font-size: 20px;
-    }
-
-    nav {
-        padding: 0 10px;
-        height: 50px !important;
-        position: relative;
     }
 
     .container {
@@ -92,8 +127,8 @@
     }
 
     @media only screen and (max-width: 768px) {
-        .navbar-brand {
-            display: none;
+        .navbar__brand {
+            display: none !important;
         }
 
         aside {
