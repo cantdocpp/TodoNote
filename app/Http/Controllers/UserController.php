@@ -36,9 +36,9 @@ class UserController extends Controller
 
     protected function respondWithToken($token) {
         return response()->json([
-            'access_token' => $token,
+            'jwt' => $token,
             'token_type' => 'bearer',
-            'user' => auth()->user()
+            'user' => auth('api')->user()
         ]);
     }
 

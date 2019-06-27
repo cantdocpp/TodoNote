@@ -1,7 +1,7 @@
-import router from 'vue-router'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from './router'
 
 Vue.use(Vuex);
 
@@ -34,26 +34,31 @@ export default new Vuex.Store({
             axios.post('http://localhost:8000/api/login', loginData)
                 .then(response => {
                     console.log(response)
-                        // let accessToken = response.data.jwt;
-                        // document.cookie = 'jwt_access_token=' + accessToken;
-                        // commit('loginStop', null);
-                        // commit('updateAccessToken', accessToken);
-                        // router.push('/');
+                    let accessToken = response.data.jwt;
+                    document.cookie = 'jwt_access_token=' + accessToken;
+                    commit('loginStop', null);
+                    commit('updateAccessToken', accessToken);
+                    router.push({ path: '/' })
                 })
                 .catch(error => {
-                    commit('loginStop', error.response.data.error);
+                    // commit('loginStop', error.response.data.error);
+                    console.log(error)
                     commit('updateAccessToken', null);
                     console.log(error.response);
                 })
         },
+
         fetchAccessToken({ commit }) {
             let arrayCookie = document.cookie.split(';');
-            let jwtCookieProperties = b.find(function(element) {
+            let jwtCookieProperties = arrayCookie.find(function(element) {
                 return element = 'jwt_access_token'
             })
-            let accessToken = jwtCookieProperties.split('=')[1];
-            commit('updateAccessToken', accessToken);
+            if (arrayCookie[0].includes('jwt_access_token')) {
+                let accessToken = jwtCookieProperties.split('=')[0];
+                commit('updateAccessToken', accessToken);
+            }
         },
+
         logout({ commit }) {
             document.cookie = 'jwt_access_token=;'
             commit('logout');

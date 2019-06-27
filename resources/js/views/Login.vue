@@ -10,8 +10,11 @@
             </div>
 
             <div class="form__content">
-                <input type="text" class="input__form" placeholder="Email" v-model="email">
-                <input type="password" class="input__form" placeholder="Password" v-model="password">
+                <input type="text" class="input__form" placeholder="Email" v-model="email" :class="emailError ? 'is-error' : ''">
+                <p class="help is-danger" v-if="emailError">email required</p>
+                <p class="help is-danger" v-if="!isEmail">Valid email required</p>
+                <input type="password" class="input__form" placeholder="Password" v-model="password" :class="passwordError ? 'is-error' : ''">
+                <p class="help is-danger" v-if="passwordError">password required</p>
             </div>
 
             <div class="form__footer">
@@ -29,7 +32,11 @@
         data() {
             return {
                 email: '',
-                password: ''
+                password: '',
+                emailError: false,
+                passwordError: false,
+                isEmail: true,
+                errors: []
             }
         },
 
@@ -37,10 +44,47 @@
             login() {
                 let data = {
                     email: this.email,
-                    password: this.password
+                    password: this.password,
+                }
+
+                this.checkForm();
+                if(this.frontendValidation() === false) {
+                    return ;
                 }
 
                 store.dispatch("doLogin", data);
+            },
+
+            checkForm: function () {
+                this.emailError = false;
+                this.passwordError = false;
+                this.isEmail = true
+                this.errors = []
+
+                if (!this.password) {
+                    this.passwordError = true;
+                    this.errors.push("Password required.");
+                }
+                if (!this.email) {
+                    this.emailError = true;
+                    this.errors.push('Email required.');
+                } else if (!this.validEmail(this.email)) {
+                    this.isEmail = false;
+                    this.errors.push('Valid email required.');
+                }
+            },
+
+            validEmail: function (email) {
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            },
+
+            frontendValidation: function() {
+                if (!this.passwordError && !this.emailError && this.isEmail) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
     }

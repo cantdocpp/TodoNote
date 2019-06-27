@@ -16,7 +16,7 @@
                 <div class="sidenav" v-if="$route.name != 'login' && $route.name != 'register'">
                     <aside class="menu">
                         <ul class="menu-list">
-                            <li><router-link :to="{ name: 'theTask', params: {section: 'Today'} }">Today</router-link></li>
+                            <li><router-link :to="{ name: 'theTask', params: {section: 'Today'} }"><i class="material-icons icon">calendar_today</i>Today</router-link></li>
                         </ul>
                     </aside>
                 </div>
@@ -54,6 +54,11 @@
 
     a {
         color: black;
+    }
+
+    .icon {
+        font-size: 20px;
+        vertical-align: middle;
     }
 
     .brand {
