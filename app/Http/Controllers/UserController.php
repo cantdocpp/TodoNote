@@ -22,7 +22,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => 'error',
                 'messages' => $validator->messages()
-            ], 200);
+            ], 400);
         }
 
         $credentials = request(['email', 'password']);

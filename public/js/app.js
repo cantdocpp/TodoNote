@@ -1749,7 +1749,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _component_TodoList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/TodoList */ "./resources/js/component/TodoList.vue");
 //
 //
 //
@@ -1791,13 +1790,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      settingClicked: false
+    };
   },
-  components: {
-    TodoList: _component_TodoList__WEBPACK_IMPORTED_MODULE_0__["default"]
+  methods: {
+    clickedSetting: function clickedSetting() {
+      this.settingClicked = true;
+    }
   }
 });
 
@@ -2066,7 +2099,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".content[data-v-91ac6b5c] {\n  font-family: \"Roboto\", sans-serif;\n  margin-left: 50px;\n  width: 70%;\n}\na[data-v-91ac6b5c] {\n  color: black;\n}\n.topnav[data-v-91ac6b5c] {\n  height: 50px;\n  width: 100%;\n  position: fixed;\n  display: flex;\n  position: relative;\n  z-index: 400;\n}\n.topnav .navbar__brand[data-v-91ac6b5c] {\n  display: inline;\n  margin-left: 10px;\n}\n.topnav .navbar__brand .navbar__brand-title[data-v-91ac6b5c] {\n  display: inline-block;\n  font-size: 22px;\n  align-items: center;\n  height: 100%;\n  display: flex;\n}\n.topnav .navbar__item__end[data-v-91ac6b5c] {\n  display: inline-block;\n  font-size: 18px;\n  right: 10px;\n  position: absolute;\n  align-items: center;\n  height: 100%;\n  display: flex;\n  cursor: pointer;\n}\n.icons[data-v-91ac6b5c] {\n  cursor: pointer;\n  vertical-align: middle;\n}\n.icon[data-v-91ac6b5c] {\n  font-size: 20px;\n  vertical-align: middle;\n}\n.container[data-v-91ac6b5c] {\n  position: relative;\n}\n.sidenav[data-v-91ac6b5c] {\n  width: 25%;\n}\naside[data-v-91ac6b5c] {\n  overflow-y: auto;\n}\n.main__content[data-v-91ac6b5c] {\n  display: flex;\n  padding-top: 40px;\n}\n@media only screen and (max-width: 768px) {\n.navbar__brand[data-v-91ac6b5c] {\n    display: none !important;\n}\naside[data-v-91ac6b5c] {\n    display: none;\n}\n}", ""]);
+exports.push([module.i, ".content[data-v-91ac6b5c] {\n  font-family: \"Roboto\", sans-serif;\n  margin-left: 50px;\n  width: 70%;\n}\na[data-v-91ac6b5c] {\n  color: black;\n}\n.app[data-v-91ac6b5c] {\n  position: relative;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center !important;\n}\n.app .main__content[data-v-91ac6b5c] {\n  margin-top: 40px !important;\n  width: 950px;\n  display: flex;\n}\n.app .main__content .sidenav[data-v-91ac6b5c] {\n  width: 25%;\n}\n.app .main__content .sidenav aside[data-v-91ac6b5c] {\n  overflow-y: auto;\n}\n.app .main__content .content[data-v-91ac6b5c] {\n  width: 70%;\n}\n.topnav[data-v-91ac6b5c] {\n  width: 100%;\n  position: fixed;\n  display: flex;\n  height: 50px;\n  align-items: center;\n  justify-content: center;\n  z-index: 400;\n  top: 0px;\n}\n.topnav .topnav__inner[data-v-91ac6b5c] {\n  width: 950px;\n  position: relative;\n  display: flex;\n}\n.topnav .topnav__inner .navbar__brand[data-v-91ac6b5c] {\n  display: inline;\n  margin-left: 10px;\n}\n.topnav .topnav__inner .navbar__brand .navbar__brand-title[data-v-91ac6b5c] {\n  display: inline-block;\n  font-size: 22px;\n  align-items: center;\n  height: 100%;\n  display: flex;\n}\n.topnav .topnav__inner .navbar__item__end[data-v-91ac6b5c] {\n  display: inline-block;\n  font-size: 18px;\n  right: 10px;\n  position: absolute;\n  align-items: center;\n  height: 100%;\n  display: flex;\n  cursor: pointer;\n}\n.topnav .topnav__inner .navbar__item__end button[data-v-91ac6b5c] {\n  padding: 0px;\n  border: none;\n  box-shadow: none;\n  height: 0px;\n}\n.topnav .topnav__inner .navbar__hamburger span[data-v-91ac6b5c] {\n  color: black;\n  width: 33px;\n  height: 5px;\n}\n.icons[data-v-91ac6b5c] {\n  cursor: pointer;\n  vertical-align: middle;\n}\n@media only screen and (max-width: 768px) {\n.navbar__brand[data-v-91ac6b5c] {\n    display: none !important;\n}\naside[data-v-91ac6b5c] {\n    display: none;\n}\n}", ""]);
 
 // exports
 
@@ -3383,27 +3416,40 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "main" }, [
     _c("nav", { staticClass: "topnav" }, [
-      _c("div", { staticClass: "navbar__brand" }, [
-        _c(
-          "div",
-          { staticClass: "navbar__brand-title" },
-          [
-            _vm.$route.name != "login" && _vm.$route.name != "register"
-              ? _c("router-link", { attrs: { to: { name: "home" } } }, [
-                  _vm._v("\n                TodoNote\n                ")
-                ])
-              : _vm._e()
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "navbar__hamburger" }),
-      _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "topnav__inner" }, [
+        _c("div", { staticClass: "navbar__brand" }, [
+          _c(
+            "div",
+            { staticClass: "navbar__brand-title" },
+            [
+              _vm.$route.name != "login" && _vm.$route.name != "register"
+                ? _c("router-link", { attrs: { to: { name: "home" } } }, [
+                    _vm._v(
+                      "\n                    TodoNote\n                    "
+                    )
+                  ])
+                : _vm._e()
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "navbar__item__end" }, [
+          _c(
+            "div",
+            {
+              staticClass: "dropdown is-right",
+              class: _vm.settingClicked ? "is-active" : ""
+            },
+            [_vm._m(1), _vm._v(" "), _vm._m(2)]
+          )
+        ])
+      ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "app" }, [
       _c("div", { staticClass: "main__content" }, [
         _vm.$route.name != "login" && _vm.$route.name != "register"
           ? _c("div", { staticClass: "sidenav" }, [
@@ -3418,7 +3464,7 @@ var render = function() {
                           attrs: {
                             to: {
                               name: "theTask",
-                              params: { section: "Today" }
+                              params: { section: "today" }
                             }
                           }
                         },
@@ -3447,9 +3493,79 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "navbar__item__end" }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("settings")])
+    return _c("div", { staticClass: "navbar__hamburger" }, [
+      _c("span"),
+      _vm._v(" "),
+      _c("span"),
+      _vm._v(" "),
+      _c("span")
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dropdown-trigger" }, [
+      _c(
+        "button",
+        {
+          staticClass: "button",
+          attrs: { "aria-haspopup": "true", "aria-controls": "dropdown-menu" }
+        },
+        [_c("i", { staticClass: "material-icons" }, [_vm._v("settings")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "dropdown-menu",
+        attrs: { id: "dropdown-menu", role: "menu" }
+      },
+      [
+        _c("div", { staticClass: "dropdown-content" }, [
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v(
+              "\n                                Dropdown item\n                            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "dropdown-item" }, [
+            _vm._v(
+              "\n                                Other dropdown items\n                            "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "dropdown-item is-active", attrs: { href: "#" } },
+            [
+              _vm._v(
+                "\n                                Active dropdown item\n                            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v(
+              "\n                                Other dropdown item\n                            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("hr", { staticClass: "dropdown-divider" }),
+          _vm._v(" "),
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v(
+              "\n                                With a divider\n                            "
+            )
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -19831,13 +19947,19 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     fetchAccessToken: function fetchAccessToken(_ref2) {
       var commit = _ref2.commit;
       var arrayCookie = document.cookie.split(';');
-      var jwtCookieProperties = arrayCookie.find(function (element) {
-        return element = 'jwt_access_token';
-      });
+      var jwtIndex = null;
 
-      if (arrayCookie[0].includes('jwt_access_token')) {
-        var accessToken = jwtCookieProperties.split('=')[0];
-        commit('updateAccessToken', accessToken);
+      for (var i = 0; i < arrayCookie.length; i++) {
+        if (arrayCookie[i].includes('jwt_access_token')) {
+          jwtIndex = i;
+        }
+      }
+
+      if (jwtIndex != null) {
+        if (arrayCookie[jwtIndex].includes('jwt_access_token')) {
+          var accessToken = arrayCookie[jwtIndex].split('=')[1];
+          commit('updateAccessToken', accessToken);
+        }
       }
     },
     logout: function logout(_ref3) {
@@ -20183,8 +20305,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\phili\Documents\TodoNote\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\phili\Documents\TodoNote\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\patrick\Documents\TodoNote\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\patrick\Documents\TodoNote\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

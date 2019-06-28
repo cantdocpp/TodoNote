@@ -50,12 +50,18 @@ export default new Vuex.Store({
 
         fetchAccessToken({ commit }) {
             let arrayCookie = document.cookie.split(';');
-            let jwtCookieProperties = arrayCookie.find(function(element) {
-                return element = 'jwt_access_token'
-            })
-            if (arrayCookie[0].includes('jwt_access_token')) {
-                let accessToken = jwtCookieProperties.split('=')[0];
-                commit('updateAccessToken', accessToken);
+            let jwtIndex = null;
+            for (let i = 0; i < arrayCookie.length; i++) {
+                if (arrayCookie[i].includes('jwt_access_token')) {
+                    jwtIndex = i;
+                }
+            }
+            
+            if (jwtIndex != null) {
+                if (arrayCookie[jwtIndex].includes('jwt_access_token')) {
+                    let accessToken = arrayCookie[jwtIndex].split('=')[1];
+                    commit('updateAccessToken', accessToken);
+                }
             }
         },
 
