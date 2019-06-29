@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import store from './store'
 
 import Home from './views/Home'
-import TodoList from './component/TodoList'
+import TodoList from './views/TodoList'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 

@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <nav class="topnav">
+        <nav class="topnav" v-if="$route.name != 'login' && $route.name != 'register'">
             <div class="topnav__inner">
                 <div class="navbar__brand">
                     <div class="navbar__brand-title">
@@ -14,16 +14,18 @@
                 </div>
 
                 <div class="navbar__hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <div class="hamburger__iner">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
                 </div>
 
                 <div class="navbar__item__end">
                     <!-- <i class="material-icons">settings</i> -->
                     <div class="dropdown is-right" :class="settingClicked ? 'is-active' : ''">
                         <div class="dropdown-trigger">
-                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu" @click="clickedSetting">
                                 <i class="material-icons">settings</i>
                             </button>
                         </div>
@@ -57,12 +59,14 @@
                 <div class="sidenav" v-if="$route.name != 'login' && $route.name != 'register'">
                     <aside class="menu">
                         <ul class="menu-list">
-                            <li><router-link :to="{ name: 'theTask', params: {section: 'today'} }"><i class="material-icons icon">calendar_today</i>Today</router-link></li>
+                            <li><router-link :to="{ name: 'theTask', params: {section: 'today'} }"><i class="material-icons icons">calendar_today</i> <span>Today</span> </router-link></li>
                         </ul>
                     </aside>
                 </div>
                 <div class="content">
-                    <router-view></router-view>
+                    <div class="app__content">
+                        <router-view></router-view>
+                    </div>
                 </div>
             </div>
         </div>  
@@ -81,7 +85,11 @@
 
         methods: {
             clickedSetting() {
-                this.settingClicked = true;
+                if (! this.settingClicked) {
+                    this.settingClicked = true
+                } else {
+                    this.settingClicked = false
+                }
             }
         },
     }
@@ -103,24 +111,18 @@
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: center !important;
+        justify-content: center !important; 
 
         .main__content {
-            margin-top: 40px !important;
+            margin-top: 80px !important;
             width: 950px;
             display: flex;
 
             .sidenav {
-                width: 25%;
+                width: 35%;
 
                 aside {
-                    overflow-y: auto;
-
-                    .menu {
-                        .menu-list {
-                            
-                        }
-                    }
+                    overflow-y: auto;                  
                 }
             }
 
@@ -130,6 +132,9 @@
         }
     }
 
+    .menu-list span {
+        vertical-align: middle
+    }
     
 
     .topnav {
@@ -179,10 +184,23 @@
             }
 
             .navbar__hamburger {
-                span {
-                    color: black;
-                    width: 33px;
-                    height: 5px;
+                display: none;
+                flex-direction: column;
+                border-radius: 2px;
+                align-items: center;
+                vertical-align: middle;
+                justify-content: center;
+                cursor: pointer;
+                margin-left: 10px;
+
+                .bar {
+                    display: block;
+                    width: 25px;
+                    background-color: black;
+                    height: 3px;
+                    margin-bottom: 4px;
+                    border-radius: 2px;
+                    transition: all 0.4s ease-in-out;
                 }
             }
         }
@@ -190,18 +208,31 @@
 
     .icons {
         cursor: pointer;
-        vertical-align: middle
+        vertical-align: middle;
+        font-size: 20px;
     }
-
-    
-
 
     @media only screen and (max-width: 768px) {
         .navbar__brand {
             display: none !important;
         }
 
-        aside {
+        .navbar__hamburger {
+            display: flex !important;
+        }
+
+        .content {
+            width: 100%;
+            display: flex;
+            margin-left: none;
+
+            .app__content {
+                width: 90%;
+                justify-content: center;
+            }
+        }
+
+        .sidenav {
             display: none;
         }
     }

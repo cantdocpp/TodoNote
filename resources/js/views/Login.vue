@@ -121,6 +121,7 @@
             display: block;
             margin: auto;
             border: 1px solid #ddd;
+            outline: none;
         }
 
          input[type=password], input[type=text] {
