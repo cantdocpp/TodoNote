@@ -9,7 +9,8 @@ export default new Vuex.Store({
     state: {
         accessToken: null,
         loggingIn: false,
-        loginError: null
+        loginError: null,
+        userId: null
     },
 
     mutations: {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
         },
         logout: (state) => {
             state.accessToken = null;
+        },
+        updateUserId: (state, loggedInUserId) => {
+            state.userId = loggedInUserId
         }
     },
 
@@ -38,7 +42,11 @@ export default new Vuex.Store({
                     document.cookie = 'jwt_access_token=' + accessToken;
                     commit('loginStop', null);
                     commit('updateAccessToken', accessToken);
-                    router.push({ path: '/' })
+                    router.push({ path: '/' });
+                    let loggedInUserId = response.data.user.id;
+                    console.log(loggedInUserId)
+                    commit('updateUserId', loggedInUserId);
+                    localStorage.setItem('user', loggedInUserId);
                 })
                 .catch(error => {
                     // commit('loginStop', error.response.data.error);
@@ -63,6 +71,11 @@ export default new Vuex.Store({
                     commit('updateAccessToken', accessToken);
                 }
             }
+        },
+
+        fetchUserId({ commit }) {
+            let userIdValue = localStorage.getItem('user');
+            commit('updateUserId', userIdValue);
         },
 
         logout({ commit }) {

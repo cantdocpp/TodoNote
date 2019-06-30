@@ -1720,6 +1720,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./resources/js/store.js");
 //
 //
 //
@@ -1796,10 +1801,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      settingClicked: false
+      settingClicked: false,
+      showProject: false,
+      addingProject: false,
+      projectInput: ''
     };
   },
   methods: {
@@ -1809,7 +1848,33 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.settingClicked = false;
       }
+    },
+    closeSetting: function closeSetting() {
+      this.settingClicked = false;
+    },
+    projectAccordionClicked: function projectAccordionClicked() {
+      this.showProject = !this.showProject;
+    },
+    addProjectClicked: function addProjectClicked() {
+      this.addingProject = !this.addingProject;
+    },
+    createProject: function createProject() {
+      if (!this.projectInput) {
+        return;
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://localhost:8000/api/project', {
+        name: this.projectInput,
+        userId: _store__WEBPACK_IMPORTED_MODULE_2__["default"].state.userId
+      }).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error.response);
+      });
     }
+  },
+  directives: {
+    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default.a
   }
 });
 
@@ -2179,7 +2244,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".content[data-v-91ac6b5c] {\n  font-family: \"Roboto\", sans-serif;\n  margin-left: 50px;\n  width: 70%;\n}\na[data-v-91ac6b5c] {\n  color: black;\n}\n.app[data-v-91ac6b5c] {\n  position: relative;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center !important;\n}\n.app .main__content[data-v-91ac6b5c] {\n  margin-top: 80px !important;\n  width: 950px;\n  display: flex;\n}\n.app .main__content .sidenav[data-v-91ac6b5c] {\n  width: 35%;\n}\n.app .main__content .sidenav aside[data-v-91ac6b5c] {\n  overflow-y: auto;\n}\n.app .main__content .content[data-v-91ac6b5c] {\n  width: 70%;\n}\n.menu-list span[data-v-91ac6b5c] {\n  vertical-align: middle;\n}\n.topnav[data-v-91ac6b5c] {\n  width: 100%;\n  position: fixed;\n  display: flex;\n  height: 50px;\n  align-items: center;\n  justify-content: center;\n  z-index: 400;\n  top: 0px;\n}\n.topnav .topnav__inner[data-v-91ac6b5c] {\n  width: 950px;\n  position: relative;\n  display: flex;\n}\n.topnav .topnav__inner .navbar__brand[data-v-91ac6b5c] {\n  display: inline;\n  margin-left: 10px;\n}\n.topnav .topnav__inner .navbar__brand .navbar__brand-title[data-v-91ac6b5c] {\n  display: inline-block;\n  font-size: 22px;\n  align-items: center;\n  height: 100%;\n  display: flex;\n}\n.topnav .topnav__inner .navbar__item__end[data-v-91ac6b5c] {\n  display: inline-block;\n  font-size: 18px;\n  right: 10px;\n  position: absolute;\n  align-items: center;\n  height: 100%;\n  display: flex;\n  cursor: pointer;\n}\n.topnav .topnav__inner .navbar__item__end button[data-v-91ac6b5c] {\n  padding: 0px;\n  border: none;\n  box-shadow: none;\n  height: 0px;\n}\n.topnav .topnav__inner .navbar__hamburger[data-v-91ac6b5c] {\n  display: none;\n  flex-direction: column;\n  border-radius: 2px;\n  align-items: center;\n  vertical-align: middle;\n  justify-content: center;\n  cursor: pointer;\n  margin-left: 10px;\n}\n.topnav .topnav__inner .navbar__hamburger .bar[data-v-91ac6b5c] {\n  display: block;\n  width: 25px;\n  background-color: black;\n  height: 3px;\n  margin-bottom: 4px;\n  border-radius: 2px;\n  transition: all 0.4s ease-in-out;\n}\n.icons[data-v-91ac6b5c] {\n  cursor: pointer;\n  vertical-align: middle;\n  font-size: 20px;\n}\n@media only screen and (max-width: 768px) {\n.navbar__brand[data-v-91ac6b5c] {\n    display: none !important;\n}\n.navbar__hamburger[data-v-91ac6b5c] {\n    display: flex !important;\n}\n.content[data-v-91ac6b5c] {\n    width: 100%;\n    display: flex;\n    margin-left: none;\n}\n.content .app__content[data-v-91ac6b5c] {\n    width: 90%;\n    justify-content: center;\n}\n.sidenav[data-v-91ac6b5c] {\n    display: none;\n}\n}", ""]);
+exports.push([module.i, ".content[data-v-91ac6b5c] {\n  font-family: \"Roboto\", sans-serif;\n  margin-left: 50px;\n  width: 70%;\n}\na[data-v-91ac6b5c] {\n  color: black;\n}\nhr[data-v-91ac6b5c] {\n  height: 1px;\n  margin: 1px;\n}\n.app[data-v-91ac6b5c] {\n  position: relative;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center !important;\n}\n.app .main__content[data-v-91ac6b5c] {\n  margin-top: 80px !important;\n  width: 950px;\n  display: flex;\n}\n.app .main__content .sidenav[data-v-91ac6b5c] {\n  width: 35%;\n  overflow-y: auto;\n}\n.app .main__content .content[data-v-91ac6b5c] {\n  width: 70%;\n}\n.accordion .accordion__header[data-v-91ac6b5c] {\n  vertical-align: middle;\n  width: 100%;\n  cursor: pointer;\n}\n.accordion .accordion__header a[data-v-91ac6b5c] {\n  display: inline;\n}\n.accordion .accordion__header i[data-v-91ac6b5c] {\n  font-size: 30px;\n  margin-left: -5px;\n  transition-duration: 0.3s;\n}\n.accordion .accordion__header span[data-v-91ac6b5c] {\n  margin-left: -4px;\n}\n.accordion .accordion__body[data-v-91ac6b5c] {\n  overflow: hidden;\n  transition: 150ms ease-out;\n}\n.accordion .accordion__body button[data-v-91ac6b5c] {\n  cursor: pointer;\n}\n.menu-list span[data-v-91ac6b5c] {\n  vertical-align: middle;\n}\n.menu-list a[data-v-91ac6b5c]:hover {\n  background: none;\n  color: inherit;\n}\n.dropdown-content[data-v-91ac6b5c] {\n  border-radius: 2px;\n}\n.topnav[data-v-91ac6b5c] {\n  width: 100%;\n  position: fixed;\n  display: flex;\n  height: 50px;\n  align-items: center;\n  justify-content: center;\n  z-index: 400;\n  top: 0px;\n}\n.topnav .topnav__inner[data-v-91ac6b5c] {\n  width: 950px;\n  position: relative;\n  display: flex;\n}\n.topnav .topnav__inner .navbar__brand[data-v-91ac6b5c] {\n  display: inline;\n  margin-left: 10px;\n}\n.topnav .topnav__inner .navbar__brand .navbar__brand-title[data-v-91ac6b5c] {\n  display: inline-block;\n  font-size: 22px;\n  align-items: center;\n  height: 100%;\n  display: flex;\n}\n.topnav .topnav__inner .navbar__item__end[data-v-91ac6b5c] {\n  display: inline-block;\n  font-size: 18px;\n  right: 10px;\n  position: absolute;\n  align-items: center;\n  height: 100%;\n  display: flex;\n  cursor: pointer;\n}\n.topnav .topnav__inner .navbar__item__end button[data-v-91ac6b5c] {\n  padding: 0px;\n  border: none;\n  box-shadow: none;\n  height: 0px;\n}\n.topnav .topnav__inner .navbar__hamburger[data-v-91ac6b5c] {\n  display: none;\n  flex-direction: column;\n  border-radius: 2px;\n  align-items: center;\n  vertical-align: middle;\n  justify-content: center;\n  cursor: pointer;\n  margin-left: 10px;\n}\n.topnav .topnav__inner .navbar__hamburger .bar[data-v-91ac6b5c] {\n  display: block;\n  width: 25px;\n  background-color: black;\n  height: 3px;\n  margin-bottom: 4px;\n  border-radius: 2px;\n  transition: all 0.4s ease-in-out;\n}\n.icons[data-v-91ac6b5c] {\n  cursor: pointer;\n  vertical-align: middle;\n  font-size: 20px;\n}\n.add__project-content[data-v-91ac6b5c] {\n  vertical-align: middle;\n  padding: 0px;\n  position: relative;\n  cursor: pointer;\n  width: 100%;\n}\n.add__project-content i[data-v-91ac6b5c] {\n  vertical-align: middle;\n}\n.add__project-content span[data-v-91ac6b5c] {\n  vertical-align: middle;\n  display: inline-block;\n  margin-top: 2px;\n  font-size: 15px;\n  color: #2d2d30;\n}\n.add__project-form input[data-v-91ac6b5c] {\n  width: 100%;\n  height: 35px;\n  border-radius: 3px;\n  border: 1px solid #ddd;\n  padding-left: 10px;\n}\n.add__project-form input[data-v-91ac6b5c]:focus {\n  outline: none;\n}\n.add__project-form .add_project-button[data-v-91ac6b5c] {\n  color: white;\n  background: black;\n  border: 1px solid black;\n  padding: 7px 8px;\n  margin-top: 7px;\n  border-radius: 3px;\n  font-weight: 700;\n}\n.add__project-form .cancel[data-v-91ac6b5c] {\n  font-size: 14px;\n  font-weight: 400;\n  cursor: pointer;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n@media only screen and (max-width: 768px) {\n.navbar__brand[data-v-91ac6b5c] {\n    display: none !important;\n}\n.navbar__hamburger[data-v-91ac6b5c] {\n    display: flex !important;\n}\n.content[data-v-91ac6b5c] {\n    width: 100%;\n    display: flex;\n    margin-left: none;\n}\n.content .app__content[data-v-91ac6b5c] {\n    width: 90%;\n    justify-content: center;\n}\n.sidenav[data-v-91ac6b5c] {\n    display: none;\n}\n}", ""]);
 
 // exports
 
@@ -3528,6 +3593,85 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-click-outside/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/vue-click-outside/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function validate(binding) {
+  if (typeof binding.value !== 'function') {
+    console.warn('[Vue-click-outside:] provided expression', binding.expression, 'is not a function.')
+    return false
+  }
+
+  return true
+}
+
+function isPopup(popupItem, elements) {
+  if (!popupItem || !elements)
+    return false
+
+  for (var i = 0, len = elements.length; i < len; i++) {
+    try {
+      if (popupItem.contains(elements[i])) {
+        return true
+      }
+      if (elements[i].contains(popupItem)) {
+        return false
+      }
+    } catch(e) {
+      return false
+    }
+  }
+
+  return false
+}
+
+function isServer(vNode) {
+  return typeof vNode.componentInstance !== 'undefined' && vNode.componentInstance.$isServer
+}
+
+exports = module.exports = {
+  bind: function (el, binding, vNode) {
+    if (!validate(binding)) return
+
+    // Define Handler and cache it on the element
+    function handler(e) {
+      if (!vNode.context) return
+
+      // some components may have related popup item, on which we shall prevent the click outside event handler.
+      var elements = e.path || (e.composedPath && e.composedPath())
+      elements && elements.length > 0 && elements.unshift(e.target)
+      
+      if (el.contains(e.target) || isPopup(vNode.context.popupItem, elements)) return
+
+      el.__vueClickOutside__.callback(e)
+    }
+
+    // add Event Listeners
+    el.__vueClickOutside__ = {
+      handler: handler,
+      callback: binding.value
+    }
+    !isServer(vNode) && document.addEventListener('click', handler)
+  },
+
+  update: function (el, binding) {
+    if (validate(binding)) el.__vueClickOutside__.callback = binding.value
+  },
+  
+  unbind: function (el, binding, vNode) {
+    // Remove Event Listeners
+    !isServer(vNode) && document.removeEventListener('click', el.__vueClickOutside__.handler)
+    delete el.__vueClickOutside__
+  }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/component/TodoSvg.vue?vue&type=template&id=54961c7e&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/component/TodoSvg.vue?vue&type=template&id=54961c7e&scoped=true& ***!
@@ -4841,9 +4985,21 @@ var render = function() {
                         on: { click: _vm.clickedSetting }
                       },
                       [
-                        _c("i", { staticClass: "material-icons" }, [
-                          _vm._v("settings")
-                        ])
+                        _c(
+                          "i",
+                          {
+                            directives: [
+                              {
+                                name: "click-outside",
+                                rawName: "v-click-outside",
+                                value: _vm.closeSetting,
+                                expression: "closeSetting"
+                              }
+                            ],
+                            staticClass: "material-icons"
+                          },
+                          [_vm._v("settings")]
+                        )
                       ]
                     )
                   ]),
@@ -4885,7 +5041,137 @@ var render = function() {
                       )
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "div",
+                      { staticClass: "accordion" },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "accordion__header",
+                            on: { click: _vm.projectAccordionClicked }
+                          },
+                          [
+                            _c("a", [
+                              !_vm.showProject
+                                ? _c(
+                                    "i",
+                                    { staticClass: "material-icons icons" },
+                                    [_vm._v("arrow_right")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.showProject
+                                ? _c(
+                                    "i",
+                                    { staticClass: "material-icons icons" },
+                                    [_vm._v("arrow_drop_down")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("Projects")])
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("transition", { attrs: { name: "accordion" } }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.showProject,
+                                  expression: "showProject"
+                                }
+                              ],
+                              staticClass: "accordion__body"
+                            },
+                            [
+                              _c("hr"),
+                              _vm._v(" "),
+                              _c("a", [
+                                !_vm.addingProject
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "add__project-content",
+                                        on: { click: _vm.addProjectClicked }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          { staticClass: "material-icons" },
+                                          [_vm._v("add")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("span", [_vm._v("Add Project")])
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.addingProject
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "add__project-form" },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.projectInput,
+                                              expression: "projectInput"
+                                            }
+                                          ],
+                                          attrs: {
+                                            type: "text",
+                                            autofocus: ""
+                                          },
+                                          domProps: { value: _vm.projectInput },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.projectInput =
+                                                $event.target.value
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "add_project-button",
+                                            on: { click: _vm.createProject }
+                                          },
+                                          [_vm._v("Add Project")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "cancel",
+                                            on: { click: _vm.addProjectClicked }
+                                          },
+                                          [_vm._v("Cancel")]
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ])
+                            ]
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  ])
                 ])
               ])
             ])
@@ -21362,6 +21648,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 });
 router.beforeEach(function (to, from, next) {
   _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch('fetchAccessToken');
+  _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch('fetchUserId');
 
   if (to.matched.some(function (record) {
     return record.meta.requiresAuth;
@@ -21411,7 +21698,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   state: {
     accessToken: null,
     loggingIn: false,
-    loginError: null
+    loginError: null,
+    userId: null
   },
   mutations: {
     loginStart: function loginStart(state) {
@@ -21426,6 +21714,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     logout: function logout(state) {
       state.accessToken = null;
+    },
+    updateUserId: function updateUserId(state, loggedInUserId) {
+      state.userId = loggedInUserId;
     }
   },
   actions: {
@@ -21442,6 +21733,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         _router__WEBPACK_IMPORTED_MODULE_3__["default"].push({
           path: '/'
         });
+        var loggedInUserId = response.data.user.id;
+        console.log(loggedInUserId);
+        commit('updateUserId', loggedInUserId);
+        localStorage.setItem('user', loggedInUserId);
       })["catch"](function (error) {
         // commit('loginStop', error.response.data.error);
         console.log(error);
@@ -21467,8 +21762,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         }
       }
     },
-    logout: function logout(_ref3) {
+    fetchUserId: function fetchUserId(_ref3) {
       var commit = _ref3.commit;
+      var userIdValue = localStorage.getItem('user');
+      commit('updateUserId', userIdValue);
+    },
+    logout: function logout(_ref4) {
+      var commit = _ref4.commit;
       document.cookie = 'jwt_access_token=;';
       commit('logout');
       _router__WEBPACK_IMPORTED_MODULE_3__["default"].push('/login');
@@ -21931,8 +22231,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\phili\Documents\TodoNote\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\phili\Documents\TodoNote\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\patrick\Documents\TodoNote\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\patrick\Documents\TodoNote\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
